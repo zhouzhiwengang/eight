@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import login from '@/components/login';
+import home from '@/components/home';
 import Admin from '@/components/admin/AdminIndex'
 import initAdminMenu from '../utils/initAdmin'
 import store from  '../store'
@@ -63,7 +64,6 @@ router.beforeEach((to, from, next) => {
     if (token === null || token === '') {
       next('/login');
     } else {
-      console.log('12345')
       // 查询动态表单
       initAdminMenu(router, store)
       // 跳转至指定页面

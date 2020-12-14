@@ -18,18 +18,15 @@ const store = new Vuex.Store({
   mutations: {
     // 修改token，并将token存入localStorage
     setToken (state, user) {
-      console.log(user)
-      state.token = user;
-      window.localStorage.setItem('token', user);
+      state.token = user.token;
+      window.localStorage.setItem('token', user.token);
     },
     setUserName (state, user) {
-      console.log(user)
-      state.username = user;
-      window.localStorage.setItem('username', user);
+      state.username = user.username;
+      window.localStorage.setItem('username', user.token);
     },
     setUserId (state, user) {
-      console.log(user)
-      state.uid = user
+      state.uid = user.uid
     },
     initAdminMenu (state, menu) {
       state.adminMenus = menu

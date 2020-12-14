@@ -6,9 +6,9 @@ const store = new Vuex.Store({
  
   state: {
     // 存储token
-    token: window.localStorage.getItem('token') ? window.localStorage.getItem('token') : '',
+    token: localStorage.getItem('token') ? localStorage.getItem('token') : '',
     // 存储username
-    username: window.localStorage.getItem('username')  ? window.localStorage.getItem('username') : '',
+    username: localStorage.getItem('username')  ? localStorage.getItem('username') : '',
     // 存储用户ID
     uid: -1,
     // 存储用户菜单
@@ -18,18 +18,15 @@ const store = new Vuex.Store({
   mutations: {
     // 修改token，并将token存入localStorage
     setToken (state, user) {
-      console.log(user)
-      state.token = user;
-      window.localStorage.setItem('token', user);
+      state.token = user.token;
+      localStorage.setItem('token', user.token);
     },
     setUserName (state, user) {
-      console.log(user)
-      state.username = user;
-      window.localStorage.setItem('username', user);
+      state.username = user.username;
+      localStorage.setItem('username', user.token);
     },
     setUserId (state, user) {
-      console.log(user)
-      state.uid = user
+      state.uid = user.uid
     },
     initAdminMenu (state, menu) {
       state.adminMenus = menu
