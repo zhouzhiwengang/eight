@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import login from '@/components/login';
-import home from '@/components/home';
-
+import Admin from '@/components/admin/AdminIndex'
+import initAdminMenu from '../utils/initAdmin'
+import store from  '../store'
+ 
 Vue.use(Router)
-
+ 
 const router = new Router({
   routes: [
     {
@@ -17,9 +19,37 @@ const router = new Router({
       component: login
     },
     {
-      path: '/home',
-      name: 'home',
-      component: home
+      path: '/admin',
+      name: 'admin',
+      component: Admin,
+      redirect: '/admin/dashboard',
+      children: [
+        {
+          path: '/admin/dashboard',
+          name: 'adminDashboard',
+          component: () => import('@/components/admin/dashboard/Index')
+        },
+        {
+          path: '/admin/user/Profile',
+          name: 'adminUserProfile',
+          component: () => import('@/components/admin/user/Profile')
+        },
+        {
+          path: '/admin/user/Role',
+          name: 'adminUserRole',
+          component: () => import('@/components/admin/user/Role')
+        },
+        {
+          path: '/admin/test/Test1',
+          name: 'adminTest1',
+          component: () => import('@/components/admin/test/Test1')
+        },
+        {
+          path: '/admin/test/Test2',
+          name: 'adminTest2',
+          component: () => import('@/components/admin/test/Test2')
+        }
+      ]
     }
   ]
 })
@@ -33,6 +63,10 @@ router.beforeEach((to, from, next) => {
     if (token === null || token === '') {
       next('/login');
     } else {
+      console.log('12345')
+      // 查询动态表单
+      initAdminMenu(router, store)
+      // 跳转至指定页面
       next();
     }
   }
